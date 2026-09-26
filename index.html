@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="docTitle">LoopPuzzle - Logic Loop Game</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%230284c7'/><stop offset='100%25' stop-color='%236366f1'/></linearGradient></defs><rect width='32' height='32' rx='7' fill='url(%23g)'/><text x='16' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='bold' font-size='14' fill='white'>LP</text></svg>">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0284c7">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.4);
+      --success: #4ade80;
+      --danger: #ef4444;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --btn-bg: #334155;
+      --btn-hover: #475569;
+      --grid-line: #334155;
+      --clue-satisfied: #64748b;
+      --badge-bg: #090d16;
+      --modal-bg: #1e293b;
+    }
+
+    [data-theme="light"] {
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.3);
+      --success: #16a34a;
+      --danger: #dc2626;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --btn-bg: #e2e8f0;
+      --btn-hover: #cbd5e1;
+      --grid-line: #cbd5e1;
+      --clue-satisfied: #94a3b8;
+      --badge-bg: #f8fafc;
+      --modal-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    header {
+      width: 100%;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, #0284c7, #6366f1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    select, button {
+      background: var(--btn-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    select:focus, button:focus {
+      outline: 2px solid var(--accent);
+    }
+
+    button:hover {
+      background: var(--btn-hover);
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .timer-badge {
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 800px;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .status-bar {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      padding: 8px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .status-bar strong {
+      color: var(--text);
+    }
+
+    .board-container {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      overflow: auto;
+      max-width: 100%;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    svg {
+      touch-action: none;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+    }
+
+    .cell-clue {
+      font-family: monospace;
+      font-size: 24px;
+      font-weight: bold;
+      fill: var(--text);
+      transition: fill 0.2s, opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .clue-satisfied {
+      fill: var(--clue-satisfied);
+      opacity: 0.35;
+    }
+
+    .clue-error {
+      fill: var(--danger);
+      font-weight: 900;
+    }
+
+    .edge-hitbox {
+      cursor: pointer;
+      stroke: transparent;
+      stroke-width: 24px;
+      stroke-linecap: round;
+    }
+
+    .edge-preview {
+      stroke: var(--accent);
+      stroke-width: 3px;
+      opacity: 0;
+      transition: opacity 0.15s;
+      pointer-events: none;
+      stroke-linecap: round;
+    }
+
+    .edge-group:hover .edge-preview {
+      opacity: 0.45;
+    }
+
+    .edge-line {
+      stroke: var(--accent);
+      stroke-width: 4.5px;
+      stroke-linecap: round;
+      pointer-events: none;
+      transition: stroke 0.2s;
+    }
+
+    .edge-line.solved {
+      stroke: var(--success);
+      filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.8));
+    }
+
+    .edge-cross {
+      stroke: var(--danger);
+      stroke-width: 2.5px;
+      stroke-linecap: round;
+      pointer-events: none;
+    }
+
+    .grid-dot {
+      fill: var(--border);
+      transition: fill 0.2s;
+      pointer-events: none;
+    }
+
+    .grid-dot.active {
+      fill: var(--accent);
+    }
+
+    .grid-dot.error {
+      fill: var(--danger);
+    }
+
+    .grid-dot.solved {
+      fill: var(--success);
+    }
+
+    .instructions {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--modal-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 440px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      animation: popIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--text);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .modal-stats {
+      background: var(--badge-bg);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 18px 0;
+      display: flex;
+      justify-content: space-around;
+      border: 1px solid var(--border);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 22px;
+      font-weight: bold;
+      font-family: monospace;
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #6366f1);
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.95;
+    }
+
+    .secret-input {
+      width: 100%;
+      background: var(--badge-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 15px;
+      color: var(--text);
+      margin-top: 12px;
+      box-sizing: border-box;
+    }
+
+    .secret-input:focus {
+      outline: 2px solid var(--accent);
+    }
+
+    .secret-reveal {
+      background: var(--badge-bg);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 16px 0 4px;
+      font-size: 15px;
+      word-break: break-all;
+      color: var(--accent);
+      font-weight: 600;
+      display: none;
+    }
+
+    .secret-reveal.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-logo">LP</div>
+      <div>
+        <div class="brand-title" id="brandTitle">LoopPuzzle</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="btnThemeToggle" title="Toggle Light/Dark Theme">🌙</button>
+      <select id="langSelect">
+        <option value="en" selected>English</option>
+        <option value="zh-TW">繁體中文</option>
+      </select>
+      <select id="puzzleSelect" style="display:none;"></select>
+      <button id="btnRandom" style="display:none;">🎲 Random</button>
+      <div class="timer-badge" id="timerDisplay">00:00</div>
+      <button id="btnUndo" title="Undo (Ctrl+Z)">↩️ Undo</button>
+      <button id="btnReset" title="Reset Board">🔄 Reset</button>
+      <button id="btnHint" title="Hint" style="color: #eab308;">💡 Hint</button>
+      <button id="btnRules">❓ Rules</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="status-bar">
+      <span><span id="labelConnectedLines">Connected Lines</span>: <strong id="lineCountDisplay">0</strong></span>
+      <span>|</span>
+      <span><span id="labelLoopCount">Loop Count</span>: <strong id="loopCountDisplay">0</strong></span>
+    </div>
+
+    <div class="board-container">
+      <svg id="gameSvg" oncontextmenu="return false;"></svg>
+    </div>
+
+    <div class="instructions" id="instructionsText">
+      🖱️ <b>Left Click / Drag</b>: Draw line &nbsp;|&nbsp; 
+      🖱️ <b>Right Click</b>: Mark cross (✕) &nbsp;|&nbsp; 
+      ⌨️ <b>Ctrl + Z</b>: Undo
+    </div>
+  </main>
+
+  <!-- Secret Modal -->
+  <div class="modal-overlay open" id="secretModal">
+    <div class="modal-card">
+      <div style="font-size: 48px; margin-bottom: 8px;">🔐</div>
+      <div class="modal-title" id="secretModalTitle">Enter a Secret</div>
+      <p style="color: var(--text-muted); font-size: 14px; margin-top: 6px;" id="secretModalDesc"></p>
+      <input class="secret-input" id="secretInput" type="text" placeholder="" autocomplete="off" spellcheck="false">
+      <select class="secret-input" id="secretSizeSelect" style="margin-top: 8px; cursor: pointer;">
+        <option value="5">5 × 5</option>
+        <option value="7" selected>7 × 7</option>
+        <option value="8">8 × 8</option>
+        <option value="10">10 × 10</option>
+      </select>
+      <select class="secret-input" id="secretDiffSelect" style="margin-top: 8px; cursor: pointer;">
+        <option value="easy" id="optCluesMore">Clues: More</option>
+        <option value="normal" selected id="optCluesNormal">Clues: Normal</option>
+        <option value="hard" id="optCluesFewer">Clues: Fewer</option>
+      </select>
+      <button class="btn-primary" id="btnStartSecret" style="margin-top: 16px;">🎮 Generate Puzzle</button>
+      <hr style="border: none; border-top: 1px solid var(--border); margin: 16px 0;">
+      <button style="width: 100%; justify-content: center;" id="btnSkipSecret">Play Normal Mode</button>
+    </div>
+  </div>
+
+  <!-- Win Modal -->
+  <div class="modal-overlay" id="winModal">
+    <div class="modal-card">
+      <div style="font-size: 48px; margin-bottom: 8px;">🏆</div>
+      <div class="modal-title" id="winTitle">Level Completed! 🎉</div>
+      <p style="color: var(--text-muted); font-size: 14px;" id="winPuzzleTitle"></p>
+
+      <div class="modal-stats">
+        <div>
+          <div class="stat-label" id="labelTimeElapsed">Time Elapsed</div>
+          <div class="stat-value" id="winTime">00:00</div>
+        </div>
+        <div>
+          <div class="stat-label" id="labelBestRecord">Best Record</div>
+          <div class="stat-value" id="winBestTime">00:00</div>
+        </div>
+      </div>
+
+      <div class="secret-reveal" id="secretReveal"></div>
+
+      <button class="btn-primary" id="btnNextLevel">Next Level ➔</button>
+      <button style="width: 100%; margin-top: 8px; justify-content: center;" id="btnReplay">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Rules Modal -->
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal-card" style="text-align: left; max-width: 500px;">
+      <div class="modal-title" style="text-align: center;" id="rulesTitle">🎮 Rules & Tips</div>
+      <div style="font-size: 14px; line-height: 1.7; color: var(--text-muted); margin: 16px 0;" id="rulesBody">
+        <p id="rulesP1"></p>
+        <p id="rulesP2"></p>
+        <p id="rulesP3"></p>
+        <p id="rulesP4"></p>
+        <p style="margin-top: 8px; color: var(--accent); font-weight: 500;" id="rulesTip"></p>
+      </div>
+      <button class="btn-primary" id="btnCloseRules">Got it, let's play!</button>
+    </div>
+  </div>
+
+  <!-- 引入獨立語系檔 -->
+  <script src="locales/en.js"></script>
+  <script src="locales/zh_tw.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
