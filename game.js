@@ -10,11 +10,11 @@ const PUZZLE_DEFINITIONS = [
     titleKey: 'puzzle_easy_5x5_1',
     rows: 5, cols: 5,
     clues: [
-      [3, 3, null, null, null],
-      [null, null, 2, 2, null],
-      [null, 2, 3, null, 2],
-      [null, 1, 3, 2, null],
-      [null, null, null, 3, 3],
+      [null, 0, null, 0, null],
+      [0, null, 3, null, 0],
+      [null, 3, 0, 3, null],
+      [0, null, 3, null, 0],
+      [null, 0, null, 0, null],
     ]
   },
   {
@@ -22,11 +22,11 @@ const PUZZLE_DEFINITIONS = [
     titleKey: 'puzzle_easy_5x5_2',
     rows: 5, cols: 5,
     clues: [
-      [null, 3, null, 3, null],
-      [3, null, 2, null, 3],
-      [null, 2, null, 2, null],
-      [3, null, 2, null, 3],
-      [null, 3, null, 3, null],
+      [0, 1, 1, 0, null],
+      [1, 2, 2, 1, 0],
+      [1, null, 1, 2, 0],
+      [0, 2, 2, 3, 1],
+      [null, 0, 1, 1, 0],
     ]
   },
   {
@@ -34,11 +34,11 @@ const PUZZLE_DEFINITIONS = [
     titleKey: 'puzzle_easy_5x5_3',
     rows: 5, cols: 5,
     clues: [
-      [0, null, 3, null, 0],
-      [null, 3, null, 3, null],
-      [3, null, 2, null, 3],
-      [null, 3, null, 3, null],
-      [null, null, 3, null, null],
+      [0, 1, 0, 1, 0],
+      [1, 3, 2, 3, 1],
+      [1, 2, 3, 2, 1],
+      [1, 2, 2, 2, 1],
+      [0, 1, 1, 1, 0],
     ]
   },
   {
@@ -46,13 +46,13 @@ const PUZZLE_DEFINITIONS = [
     titleKey: 'puzzle_medium_7x7_1',
     rows: 7, cols: 7,
     clues: [
-      [null, 3, null, 2, null, 3, null],
-      [3, null, 2, null, 2, null, 3],
-      [null, 2, 0, null, 0, 2, null],
-      [2, null, null, 3, null, null, 2],
-      [null, 2, 0, null, 0, 2, null],
-      [3, null, 2, null, 2, null, 3],
-      [null, 3, null, 2, null, 3, null],
+      [0, 0, 0, 1, 0, 0, 0],
+      [0, 0, 2, 3, 2, 0, 0],
+      [0, 1, 2, 1, 2, 1, 0],
+      [0, 1, 2, null, 2, 1, 0],
+      [0, 1, 2, 1, 2, 1, 0],
+      [0, 0, 2, 3, 2, 0, 0],
+      [0, 0, 0, 1, 0, 0, 0],
     ]
   },
   {
@@ -60,14 +60,14 @@ const PUZZLE_DEFINITIONS = [
     titleKey: 'puzzle_medium_8x8_1',
     rows: 8, cols: 8,
     clues: [
-      [3, 3, null, 2, 2, null, 3, 3],
-      [3, null, null, 1, 1, null, null, 3],
-      [null, null, 2, null, null, 2, null, null],
-      [2, 1, null, 3, 3, null, 1, 2],
-      [2, 1, null, 3, 3, null, 1, 2],
-      [null, null, 2, null, null, 2, null, null],
-      [3, null, null, 1, 1, null, null, 3],
-      [3, 3, null, 2, 2, null, 3, 3],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 1, 1, 1, 1, 0, 0],
+      [0, 1, 2, 2, 2, 2, 1, 0],
+      [0, 1, 2, 2, 2, 2, 1, 0],
+      [0, 1, 2, 2, 2, 2, 1, 0],
+      [0, 1, 2, 2, 2, 2, 1, 0],
+      [0, 0, 1, 1, 1, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
     ]
   },
   {
@@ -75,16 +75,16 @@ const PUZZLE_DEFINITIONS = [
     titleKey: 'puzzle_hard_10x10_1',
     rows: 10, cols: 10,
     clues: [
-      [null, 3, null, 2, null, null, 2, null, 3, null],
-      [3, null, 2, null, 3, 3, null, 2, null, 3],
-      [null, 2, null, 1, null, null, 1, null, 2, null],
-      [2, null, 1, null, 2, 2, null, 1, null, 2],
-      [null, 3, null, 2, 0, 0, 2, null, 3, null],
-      [null, 3, null, 2, 0, 0, 2, null, 3, null],
-      [2, null, 1, null, 2, 2, null, 1, null, 2],
-      [null, 2, null, 1, null, null, 1, null, 2, null],
-      [3, null, 2, null, 3, 3, null, 2, null, 3],
-      [null, 3, null, 2, null, null, 2, null, 3, null],
+      [0, 0, 0, null, 0, 0, 0, 0, 0, 0],
+      [0, 0, 1, 1, 0, 0, null, 0, 0, 0],
+      [0, 1, 2, 2, 2, 1, 0, 0, 0, 0],
+      [0, 1, 2, 1, 1, 2, 1, 0, null, 0],
+      [0, 0, 1, 2, 1, 1, 2, 1, 0, 0],
+      [0, null, 0, 1, 2, 1, 1, 2, 1, 0],
+      [0, 0, 0, 0, 1, 2, 2, 2, 1, 0],
+      [0, 0, 0, 0, null, 0, 1, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ]
   }
 ];
@@ -126,6 +126,11 @@ function getSecretFromURL() {
   return s ? decodeSecret(s) : null;
 }
 
+function getModeFromURL() {
+  const p = new URLSearchParams(window.location.search);
+  return p.get('mode');
+}
+
 function getSizeFromURL() {
   const p = new URLSearchParams(window.location.search);
   const sz = p.get('sz');
@@ -144,33 +149,79 @@ function buildSecretURL(secret, size, diff) {
 
 const DIFF_DENSITY = { easy: 0.85, normal: 0.65, hard: 0.40 };
 
+function checkGridBoundaryLoop(grid, size) {
+  const vDegrees = Array.from({ length: size + 1 }, () => Array(size + 1).fill(0));
+  let edgeCount = 0;
+  for (let r = 0; r <= size; r++) {
+    for (let c = 0; c < size; c++) {
+      const isEdge = (r === 0 && grid[0][c]) || (r === size && grid[size-1][c]) || (r > 0 && r < size && grid[r-1][c] !== grid[r][c]);
+      if (isEdge) {
+        vDegrees[r][c]++;
+        vDegrees[r][c+1]++;
+        edgeCount++;
+      }
+    }
+  }
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c <= size; c++) {
+      const isEdge = (c === 0 && grid[r][0]) || (c === size && grid[r][size-1]) || (c > 0 && c < size && grid[r][c-1] !== grid[r][c]);
+      if (isEdge) {
+        vDegrees[r][c]++;
+        vDegrees[r+1][c]++;
+        edgeCount++;
+      }
+    }
+  }
+  for (let r = 0; r <= size; r++) {
+    for (let c = 0; c <= size; c++) {
+      if (vDegrees[r][c] !== 0 && vDegrees[r][c] !== 2) return false;
+    }
+  }
+  return edgeCount >= 4;
+}
+
 function generateSecretLevel(secret, size = 7, diff = 'normal') {
   const density = DIFF_DENSITY[diff] ?? 0.65;
   const rand = makePRNG(strToSeed(secret + ':' + size));
-  const grid = Array.from({ length: size }, () => Array(size).fill(false));
-  const mid = Math.floor(size / 2);
-  grid[mid][mid] = true;
-  grid[mid][mid - 1] = true;
-  const target = Math.floor(size * size * 0.4);
-  let count = 2;
-  for (let step = 0; step < 500 && count < target; step++) {
-    const r = Math.floor(rand() * size);
-    const c = Math.floor(rand() * size);
-    if (!grid[r][c]) {
-      const adj = (r > 0 && grid[r-1][c]) || (r < size-1 && grid[r+1][c]) ||
-                  (c > 0 && grid[r][c-1]) || (c < size-1 && grid[r][c+1]);
-      if (adj) { grid[r][c] = true; count++; }
+  let grid = null;
+
+  for (let attempt = 0; attempt < 100; attempt++) {
+    const candidate = Array.from({ length: size }, () => Array(size).fill(false));
+    const mid = Math.floor(size / 2);
+    candidate[mid][mid] = true;
+    if (size > 3) candidate[mid][mid - 1] = true;
+    const target = Math.floor(size * size * 0.4);
+    let count = 2;
+    for (let step = 0; step < 500 && count < target; step++) {
+      const r = Math.floor(rand() * size);
+      const c = Math.floor(rand() * size);
+      if (!candidate[r][c]) {
+        const adj = (r > 0 && candidate[r-1][c]) || (r < size-1 && candidate[r+1][c]) ||
+                    (c > 0 && candidate[r][c-1]) || (c < size-1 && candidate[r][c+1]);
+        if (adj) { candidate[r][c] = true; count++; }
+      }
+    }
+    if (checkGridBoundaryLoop(candidate, size)) {
+      grid = candidate;
+      break;
     }
   }
+
+  // ── 最後一道保險 ─────────────────────────────────────────────────────────
+  if (!grid) {
+    grid = Array.from({ length: size }, () => Array(size).fill(false));
+    grid[Math.floor(size/2)][Math.floor(size/2)] = true;
+  }
+
   const clues = Array.from({ length: size }, () => Array(size).fill(null));
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
-      if (grid[r][c]) {
-        let edges = 0;
-        if (r === 0 || !grid[r-1][c]) edges++;
-        if (r === size-1 || !grid[r+1][c]) edges++;
-        if (c === 0 || !grid[r][c-1]) edges++;
-        if (c === size-1 || !grid[r][c+1]) edges++;
+      let edges = 0;
+      if (r === 0 ? grid[0][c] : grid[r-1][c] !== grid[r][c]) edges++;
+      if (r === size-1 ? grid[size-1][c] : grid[r+1][c] !== grid[r][c]) edges++;
+      if (c === 0 ? grid[r][0] : grid[r][c-1] !== grid[r][c]) edges++;
+      if (c === size-1 ? grid[r][size-1] : grid[r][c+1] !== grid[r][c]) edges++;
+      if (grid[r][c] || rand() < 0.25) {
         if (rand() < density) clues[r][c] = edges;
       }
     }
@@ -185,8 +236,8 @@ let currentTheme = localStorage.getItem('looppuzzle_theme') || 'light';
 
 function applyTheme(theme) {
   currentTheme = theme;
-  if (theme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
     document.getElementById('btnThemeToggle').textContent = '☀️';
   } else {
     document.documentElement.removeAttribute('data-theme');
@@ -282,7 +333,7 @@ function applyTranslations() {
 
 function updatePuzzleSelectOptions() {
   const sel = document.getElementById('puzzleSelect');
-  const savedVal = sel.value !== '' ? Number(sel.value) : currentPuzzleIndex;
+  const savedVal = currentPuzzleIndex >= 0 ? currentPuzzleIndex : (puzzle ? 'custom' : '');
   sel.innerHTML = '';
   PUZZLES.forEach((p, idx) => {
     const opt = document.createElement('option');
@@ -291,6 +342,13 @@ function updatePuzzleSelectOptions() {
     opt.textContent = (best ? '✓ ' : '') + getPuzzleTitle(p);
     sel.appendChild(opt);
   });
+
+  if (currentPuzzleIndex === -1 && puzzle) {
+    const opt = document.createElement('option');
+    opt.value = 'custom';
+    opt.textContent = getPuzzleTitle(puzzle);
+    sel.appendChild(opt);
+  }
   sel.value = savedVal;
 }
 
@@ -300,21 +358,29 @@ function init() {
   applyTranslations();
 
   const urlSecret = getSecretFromURL();
+  const urlMode = getModeFromURL();
+
   if (urlSecret) {
     currentSecret = urlSecret;
     const urlSize = getSizeFromURL();
     const urlDiff = getDiffFromURL();
     document.getElementById('secretModal').classList.remove('open');
     loadSecretPuzzle(urlSecret, urlSize, urlDiff);
+  } else if (urlMode === 'normal') {
+    document.getElementById('secretModal').classList.remove('open');
+    document.getElementById('puzzleSelect').style.display = '';
+    document.getElementById('btnRandom').style.display = '';
+    const newP = generateRandomLevel(5);
+    loadCustomPuzzle(newP);
   } else {
-    loadPuzzle(0);
+    loadDefaultPuzzle(0);
   }
 
   applyTheme(currentTheme);
   setupEvents();
 }
 
-// ── 關卡載入 ──────────────────────────────────────────────────────────────
+// ── Secret關卡載入 ───────────────────────────────────────────────────────
 function loadSecretPuzzle(secret, size = 7, diff = 'normal') {
   puzzle = generateSecretLevel(secret, size, diff);
   currentPuzzleIndex = -1;
@@ -347,10 +413,31 @@ function loadSecretPuzzle(secret, size = 7, diff = 'normal') {
   }
 }
 
-function loadPuzzle(idx) {
+// ── 普通關卡載入 ───────────────────────────────────────────────────────────
+function loadCustomPuzzle(p) {
+  currentPuzzleIndex = -1;
+  puzzle = p;
+  updatePuzzleSelectOptions();
+
+  hLines = Array.from({ length: puzzle.rows + 1 }, () => Array(puzzle.cols).fill(0));
+  vLines = Array.from({ length: puzzle.rows }, () => Array(puzzle.cols + 1).fill(0));
+  undoStack = [];
+  isSolved = false;
+  timer = 0;
+  timerStarted = false;
+  updateTimerDisplay();
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+
+  renderBoard();
+  validate();
+}
+
+// ── 預設關卡載入 ───────────────────────────────────────────────────────────
+function loadDefaultPuzzle(idx) {
   currentPuzzleIndex = idx;
   puzzle = PUZZLES[idx];
-  document.getElementById('puzzleSelect').value = idx;
+  updatePuzzleSelectOptions();
 
   hLines = Array.from({ length: puzzle.rows + 1 }, () => Array(puzzle.cols).fill(0));
   vLines = Array.from({ length: puzzle.rows }, () => Array(puzzle.cols + 1).fill(0));
@@ -381,7 +468,7 @@ function renderBoard() {
   svg.setAttribute('height', height);
   svg.innerHTML = '';
 
-  const gridStrokeColor = currentTheme === 'light' ? '#e2e8f0' : '#334155';
+  const gridStrokeColor = currentTheme === 'dark' ? '#334155' : '#e2e8f0';
 
   for (let r = 0; r <= puzzle.rows; r++)
     svg.appendChild(createSvgLine(PADDING, PADDING + r * CELL_SIZE, PADDING + puzzle.cols * CELL_SIZE, PADDING + r * CELL_SIZE, gridStrokeColor, '1', '2 3'));
@@ -660,31 +747,46 @@ function handleVictory() {
 
 // ── 隨機關卡生成 ──────────────────────────────────────────────────────────
 function generateRandomLevel(size = 5) {
-  const grid = Array.from({ length: size }, () => Array(size).fill(false));
-  const mid = Math.floor(size / 2);
-  grid[mid][mid] = true;
-  if (size > 3) grid[mid][mid - 1] = true;
-  const target = Math.floor(size * size * 0.4);
-  let count = 2;
-  for (let step = 0; step < 200 && count < target; step++) {
-    const r = Math.floor(Math.random() * size);
-    const c = Math.floor(Math.random() * size);
-    if (!grid[r][c]) {
-      const adj = (r > 0 && grid[r-1][c]) || (r < size-1 && grid[r+1][c]) || (c > 0 && grid[r][c-1]) || (c < size-1 && grid[r][c+1]);
-      if (adj) { grid[r][c] = true; count++; }
+  let grid = null;
+  for (let attempt = 0; attempt < 50; attempt++) {
+    const candidate = Array.from({ length: size }, () => Array(size).fill(false));
+    const mid = Math.floor(size / 2);
+    candidate[mid][mid] = true;
+    if (size > 3) candidate[mid][mid - 1] = true;
+    const target = Math.floor(size * size * 0.4);
+    let count = 2;
+    for (let step = 0; step < 200 && count < target; step++) {
+      const r = Math.floor(Math.random() * size);
+      const c = Math.floor(Math.random() * size);
+      if (!candidate[r][c]) {
+        const adj = (r > 0 && candidate[r-1][c]) || (r < size-1 && candidate[r+1][c]) || (c > 0 && candidate[r][c-1]) || (c < size-1 && candidate[r][c+1]);
+        if (adj) { candidate[r][c] = true; count++; }
+      }
+    }
+    if (checkGridBoundaryLoop(candidate, size)) {
+      grid = candidate;
+      break;
     }
   }
+
+  if (!grid) {
+    grid = Array.from({ length: size }, () => Array(size).fill(false));
+    grid[Math.floor(size/2)][Math.floor(size/2)] = true;
+  }
+
   const clues = Array.from({ length: size }, () => Array(size).fill(null));
-  for (let r = 0; r < size; r++)
-    for (let c = 0; c < size; c++)
-      if (grid[r][c]) {
-        let edges = 0;
-        if (r === 0 || !grid[r-1][c]) edges++;
-        if (r === size-1 || !grid[r+1][c]) edges++;
-        if (c === 0 || !grid[r][c-1]) edges++;
-        if (c === size-1 || !grid[r][c+1]) edges++;
-        clues[r][c] = Math.random() < 0.65 ? edges : null;
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      let edges = 0;
+      if (r === 0 ? grid[0][c] : grid[r-1][c] !== grid[r][c]) edges++;
+      if (r === size-1 ? grid[size-1][c] : grid[r+1][c] !== grid[r][c]) edges++;
+      if (c === 0 ? grid[r][0] : grid[r][c-1] !== grid[r][c]) edges++;
+      if (c === size-1 ? grid[r][size-1] : grid[r][c+1] !== grid[r][c]) edges++;
+      if (grid[r][c] || Math.random() < 0.25) {
+        clues[r][c] = Math.random() < 0.70 ? edges : null;
       }
+    }
+  }
   return { id: 'rand_' + Date.now(), isRandom: true, rows: size, cols: size, clues };
 }
 
@@ -716,7 +818,7 @@ function setupEvents() {
   });
 
   document.getElementById('puzzleSelect').addEventListener('change', (e) => {
-    loadPuzzle(Number(e.target.value));
+    loadDefaultPuzzle(Number(e.target.value));
   });
 
   document.getElementById('btnUndo').addEventListener('click', () => {
@@ -732,27 +834,40 @@ function setupEvents() {
   });
 
   document.getElementById('btnReset').addEventListener('click', () => {
-    loadPuzzle(currentPuzzleIndex);
+    if (currentPuzzleIndex === -1) {
+      loadCustomPuzzle(puzzle);
+    } else {
+      loadDefaultPuzzle(currentPuzzleIndex);
+    }
   });
 
   document.getElementById('btnHint').addEventListener('click', giveHint);
 
   document.getElementById('btnRandom').addEventListener('click', () => {
-    const newP = generateRandomLevel(6);
-    PUZZLES.push(newP);
-    updatePuzzleSelectOptions();
-    loadPuzzle(PUZZLES.length - 1);
+    const currentSize = (puzzle && puzzle.rows) ? puzzle.rows : 5;
+    const newP = generateRandomLevel(currentSize);
+    loadCustomPuzzle(newP);
   });
 
   document.getElementById('btnNextLevel').addEventListener('click', () => {
     document.getElementById('winModal').classList.remove('open');
-    const next = (currentPuzzleIndex + 1) % PUZZLES.length;
-    loadPuzzle(next);
+    if (currentPuzzleIndex === -1) {
+      const currentSize = (puzzle && puzzle.rows) ? puzzle.rows : 5;
+      const newP = generateRandomLevel(currentSize);
+      loadCustomPuzzle(newP);
+    } else {
+      const next = (currentPuzzleIndex + 1) % PUZZLES.length;
+      loadDefaultPuzzle(next);
+    }
   });
 
   document.getElementById('btnReplay').addEventListener('click', () => {
     document.getElementById('winModal').classList.remove('open');
-    loadPuzzle(currentPuzzleIndex);
+    if (currentPuzzleIndex === -1) {
+      loadCustomPuzzle(puzzle);
+    } else {
+      loadDefaultPuzzle(currentPuzzleIndex);
+    }
   });
 
   document.getElementById('btnStartSecret').addEventListener('click', () => {
